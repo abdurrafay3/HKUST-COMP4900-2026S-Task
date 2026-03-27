@@ -3,7 +3,7 @@
 name: Validate Student and Sync to Spreadsheet
 
 on:
-  pull_request:
+  pull_request_target:
     branches: [ "master" ]
 
 # Required to post comments on pull requests
@@ -18,6 +18,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
 
       # ── Step 1: Validate student.json ────────────────────────────────────────
       - name: Validate student.json
